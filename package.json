@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint custom/**/*.js",
-    "test": "node tests/sample.test.js"
-  },
+  "build": "copyfiles -u 1 public/**/* dist",
+  "lint": "eslint custom/**/*.js tests/**/*.js",
+  "test": "jest"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.57.0"
+    "copyfiles": "^2.4.1",
+    "eslint": "^8.57.1",
+    "jest": "^30.2.0"
   }
 }

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+  <title>Cloud DevOps Dashboard</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Cloud DevOps Dashboard used to demonstrate CI/CD and cloud deployment.">
+  <meta name="keywords" content="DevOps, CI/CD, Dashboard, Cloud, Admin Template">
+  <meta name="author" content="Our Group">
+
+  <!-- [Favicon] icon -->
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon">
+
+  <!-- [Fonts & Styles] -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
+  <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css">
+  <link rel="stylesheet" href="../assets/fonts/feather.css">
+  <link rel="stylesheet" href="../assets/fonts/fontawesome.css">
+  <link rel="stylesheet" href="../assets/fonts/material.css">
+  <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link">
+  <link rel="stylesheet" href="../assets/css/style-preset.css">
+</head>
+<!-- [Head] end -->
+
+<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
+  <!-- [ Pre-loader ] start -->
+  <div class="loader-bg">
+    <div class="loader-track">
+      <div class="loader-fill"></div>
+    </div>
+  </div>
+  <!-- [ Pre-loader ] End -->
+
+  <!-- [ Sidebar Menu ] start -->
+  <nav class="pc-sidebar">
+    <div class="navbar-wrapper">
+      <div class="m-header">
+        <a href="../dashboard/index.html" class="b-brand text-primary">
+          <img src="../assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo">
+        </a>
+      </div>
+      <div class="navbar-content">
+        <ul class="pc-navbar">
+          <li class="pc-item">
+            <a href="../dashboard/index.html" class="pc-link">
+              <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
+              <span class="pc-mtext">Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- [ Sidebar Menu ] end -->
+
+  <!-- [ Header Topbar ] start -->
+  <header class="pc-header">
+    <div class="header-wrapper">
+      <!-- Mobile / Search -->
+      <div class="me-auto pc-mob-drp">
+        <ul class="list-unstyled">
+          <li class="pc-h-item pc-sidebar-collapse">
+            <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
+              <i class="ti ti-menu-2"></i>
+            </a>
+          </li>
+          <li class="pc-h-item pc-sidebar-popup">
+            <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
+              <i class="ti ti-menu-2"></i>
+            </a>
+          </li>
+          <li class="pc-h-item d-none d-md-inline-flex">
+            <form class="header-search">
+              <i data-feather="search" class="icon-search"></i>
+              <input type="search" class="form-control" placeholder="Search here...">
+            </form>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ms-auto">
+        <ul class="list-unstyled">
+          <!-- Simple user profile -->
+          <li class="dropdown pc-h-item header-user-profile">
+            <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button">
+              <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
+              <span>Admin User</span>
+            </a>
+            <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+              <div class="dropdown-header">
+                <div class="d-flex mb-1">
+                  <div class="flex-shrink-0">
+                    <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1">Admin User</h6>
+                    <span>DevOps Dashboard</span>
+                  </div>
+                </div>
+              </div>
+              <a href="../index.html" class="dropdown-item">
+                <i class="ti ti-home"></i>
+                <span>Back to Landing Page</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <!-- [ Header ] end -->
+
+  <!-- [ Main Content ] start -->
+  <div class="pc-container">
+    <div class="pc-content">
+      <!-- [ breadcrumb ] start -->
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <div class="page-header-title">
+                <h5 class="m-b-10">Cloud DevOps Dashboard</h5>
+              </div>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ breadcrumb ] end -->
+
+      <!-- [ Main Content ] start -->
+      <div class="row">
+        <!-- High-level DevOps stats -->
+        <div class="col-md-6 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="mb-2 f-w-400 text-muted">Total Pipelines Run</h6>
+              <h4 class="mb-3">124</h4>
+              <p class="mb-0 text-muted text-sm">Number of CI/CD pipelines executed.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="mb-2 f-w-400 text-muted">Successful Deployments</h6>
+              <h4 class="mb-3">118</h4>
+              <p class="mb-0 text-muted text-sm">Latest builds deployed without errors.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="mb-2 f-w-400 text-muted">Failed Builds</h6>
+              <h4 class="mb-3">6</h4>
+              <p class="mb-0 text-muted text-sm">Useful to track pipeline issues.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="mb-2 f-w-400 text-muted">Active Environment</h6>
+              <h4 class="mb-3">Production</h4>
+              <p class="mb-0 text-muted text-sm">Current environment hosting the app.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deployment History table -->
+        <div class="col-md-12 col-xl-8">
+          <h5 class="mb-3">Deployment History</h5>
+          <div class="card tbl-card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-borderless mb-0">
+                  <thead>
+                    <tr>
+                      <th>DEPLOY ID</th>
+                      <th>BRANCH</th>
+                      <th>STATUS</th>
+                      <th>TRIGGERED BY</th>
+                      <th class="text-end">TIMESTAMP</th>
+                    </tr>
+                  </thead>
+                  <tbody id="deploy-table-body">
+                    <!-- Example static rows (you can later replace using JS from your API) -->
+                    <tr>
+                      <td>#00124</td>
+                      <td>main</td>
+                      <td><span class="badge bg-success">Success</span></td>
+                      <td>Admin</td>
+                      <td class="text-end">2025-11-30 14:23</td>
+                    </tr>
+                    <tr>
+                      <td>#00123</td>
+                      <td>main</td>
+                      <td><span class="badge bg-danger">Failed</span></td>
+                      <td>Admin</td>
+                      <td class="text-end">2025-11-29 17:05</td>
+                    </tr>
+                    <tr>
+                      <td>#00122</td>
+                      <td>feature/ui-update</td>
+                      <td><span class="badge bg-success">Success</span></td>
+                      <td>Teammate</td>
+                      <td class="text-end">2025-11-28 09:41</td>
+                    </tr>
+                    <tr>
+                      <td>#00121</td>
+                      <td>main</td>
+                      <td><span class="badge bg-success">Success</span></td>
+                      <td>Admin</td>
+                      <td class="text-end">2025-11-27 20:10</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="mt-2 text-muted text-sm mb-0">
+                These entries represent recent deployments from the CI/CD pipeline.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simple explanation card -->
+        <div class="col-md-12 col-xl-4">
+          <h5 class="mb-3">Pipeline Overview</h5>
+          <div class="card">
+            <div class="card-body">
+              <p class="text-muted mb-2">
+                This dashboard is used to visualize basic information about our DevOps pipeline.
+              </p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <b>Build Stage</b><br>
+                  Source code is tested and packaged.
+                </li>
+                <li class="list-group-item">
+                  <b>Test Stage</b><br>
+                  Automated checks validate the application.
+                </li>
+                <li class="list-group-item">
+                  <b>Deploy Stage</b><br>
+                  Artifacts are deployed to the cloud environment.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- [ Main Content ] end -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="pc-footer">
+    <div class="footer-wrapper container-fluid">
+      <div class="row">
+        <div class="col-sm my-1">
+          <p class="m-0">Cloud DevOps Dashboard &copy; Our Group</p>
+        </div>
+        <div class="col-auto my-1">
+          <ul class="list-inline footer-link mb-0">
+            <li class="list-inline-item"><a href="../index.html">Landing Page</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- [Page Specific JS] (you can keep the charts or remove if not needed) -->
+  <script src="../assets/js/plugins/apexcharts.min.js"></script>
+  <script src="../assets/js/pages/dashboard-default.js"></script>
+
+  <!-- Required Js -->
+  <script src="../assets/js/plugins/popper.min.js"></script>
+  <script src="../assets/js/plugins/simplebar.min.js"></script>
+  <script src="../assets/js/plugins/bootstrap.min.js"></script>
+  <script src="../assets/js/fonts/custom-font.js"></script>
+  <script src="../assets/js/pcoded.js"></script>
+  <script src="../assets/js/plugins/feather.min.js"></script>
+
+  <script>layout_change('light');</script>
+  <script>change_box_container('false');</script>
+  <script>layout_rtl_change('false');</script>
+  <script>preset_change("preset-1");</script>
+  <script>font_change("Public-Sans");</script>
+</body>
+</html>
