@@ -1,11 +1,11 @@
-name: Build pipeline
+name: Test pipeline
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,11 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build project
-        run: npm run build
+      - name: Run ESLint
+        run: npm run lint
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: project-dist
-          path: dist/
+      - name: Run Jest tests
+        run: npm test
+        env:
+          CI: true
