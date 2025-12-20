@@ -22,6 +22,6 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
+          aws s3 sync dist/application/ s3://cloud-admin-dashboard--delete
           --exclude ".git/*" \
           --exclude ".github/*"
