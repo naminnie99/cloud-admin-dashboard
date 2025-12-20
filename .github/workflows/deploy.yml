@@ -25,4 +25,4 @@ jobs:
           aws s3api get-bucket-location --bucket cloud-admin-dashboard
       - name: Deploy to S3
         run: |
-          aws s3 sync dist/application/ s3://cloud-admin-dashboard --delete --region ap-southeast-1
+          aws s3 sync dist/application/ s3://cloud-admin-dashboard --region ap-southeast-1
