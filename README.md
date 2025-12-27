@@ -135,154 +135,187 @@ getAppVersion() → 1.0.0
 ✔ Build artifacts generated
 ✔ Test pipeline passed
 
-
-/**
- * ============================================================
- * Cloud Admin Dashboard — CI/CD Automation Project
- * ============================================================
+  ============================================================
+   DEPLOYMENT PIPELINE
+  ============================================================
  *
- * This is a student-built project that demonstrates the complete
- * Continuous Integration and Continuous Deployment (CI/CD) process
- * using JavaScript (Node.js) and GitHub Actions.
+ * A deployment pipeline is a sequence of automated steps that
+ * move application code from a version control system into a
+ * live production environment.
  *
- * The project includes automated build workflows, automated testing,
- * artifact generation, and a simulated deployment workflow.
+ * GitHub Actions is used to automate build and deployment
+ * workflows using YAML configuration files.
  *
- * ============================================================
- * PROJECT OVERVIEW
- * ============================================================
+ * ------------------------------------------------------------
+ * DEPLOYMENT PIPELINE SUMMARY
+ * ------------------------------------------------------------
+ * | Stage        | Tool Used        | Description                    |
+ * |--------------|------------------|--------------------------------|
+ * | Source Code  | GitHub           | Version control repository     |
+ * | CI Trigger   | GitHub Actions   | Triggered on code push         |
+ * | Build        | Node.js          | Generates static build files   |
+ * | Artifact     | dist/ folder     | Deployment-ready output        |
+ * | Deployment   | AWS S3           | Static website hosting         |
  *
- * This project implements CI/CD practices using:
- * - Git for version control
- * - GitHub Actions for workflow automation
- * - JavaScript (Node.js) for application logic and build execution
- * - Jest for automated testing
- * - Build artifacts for deployment simulation
+ * ------------------------------------------------------------
  *
- * A static dashboard interface is used to visualize:
- * - Pipeline activity
- * - Build summaries
- * - Tables, widgets, and chart outputs
+ * Cloud deployment is preferred over on-premise hosting due to
+ * scalability, high availability, and simplified management.
  *
- * ============================================================
- * PROJECT STRUCTURE
- * ============================================================
+ * Amazon Web Services (AWS) enables global deployment and easy
+ * CI/CD integration with a pay-as-you-use pricing model.
  *
- * PROJECT/
- * ├── public/               // Static dashboard source pages (HTML/CSS/JS)
- * ├── dist/                 // Automated build output (deployment artifact)
- * ├── custom/               // Custom JavaScript logic
- * ├── tests/                // Automated test scripts (Jest)
- * ├── .github/workflows/    // GitHub Actions CI/CD workflows (YAML)
- * ├── package.json          // Node.js project configuration
- * └── README.md             // Project documentation
+ * Deployment Process:
+ * 1. GitHub Actions retrieves the build artifact (HTML, CSS, JS)
+ * 2. Files are automatically uploaded to an Amazon S3 bucket
  *
- * ============================================================
- * CI/CD FEATURES
- * ============================================================
+ * Secure authentication between GitHub Actions and AWS is
+ * handled using encrypted credentials stored in GitHub Secrets.
  *
- * Automated pipelines are triggered on every code push.
- *
- * Build Pipeline:
- * - Trigger: Git push
- * - Action: Generates production-ready files in the `dist/` directory
- *
- * Test Pipeline:
- * - Trigger: Git push
- * - Action: Executes automated JavaScript tests using Jest
- *
- * ============================================================
- * DASHBOARD FEATURES
- * ============================================================
- *
- * Dashboard Page:
- * - Displays build summaries and pipeline status
- *
- * Tables Page:
- * - Demonstrates pagination and filtering functionality
- *
- * Widgets Page:
- * - Shows UI-based analytics widgets
- *
- * Charts Page:
- * - Displays graphical data visualizations
- *
- * ============================================================
- * TECHNOLOGY STACK
- * ============================================================
- *
- * Primary Programming Language:
- * - JavaScript (Node.js)
- *
- * Supporting Technologies:
- * - Node.js (runtime environment)
- * - Jest (automated testing framework)
- * - GitHub Actions (CI/CD automation)
- * - HTML, CSS, JavaScript (frontend dashboard)
- * - YAML (workflow configuration)
- *
- * ============================================================
- * CUSTOM JAVASCRIPT LOGIC
- * ============================================================
- *
- * Custom logic is defined inside:
- * /custom/main.js
- *
- * This logic is tested automatically during CI execution.
- *
- */
-
-function add(a, b) {
-  return a + b;
-}
-
-function getAppVersion() {
-  return "1.0.0";
-}
-
-module.exports = { add, getAppVersion };
-
-/**
- * ============================================================
- * CI/CD WORKFLOW EXECUTION
- * ============================================================
- *
- * 1. Developer pushes code to the GitHub repository
- * 2. GitHub Actions automatically triggers CI workflows
- * 3. Node.js installs project dependencies
- * 4. Jest executes automated tests
- * 5. Build artifacts are generated in the `dist/` directory
- * 6. Workflow completes if all checks pass successfully
- *
- * ============================================================
- * RESULTS
- * ============================================================
- *
- * - Fully automated CI/CD pipeline implemented
- * - JavaScript logic validated through automated tests
- * - Build artifacts generated without manual intervention
- * - Dashboard UI rendered successfully
- * - GitHub Actions workflows completed successfully
- *
- * ============================================================
- * CONCLUSION
- * ============================================================
- *
- * This project demonstrates how JavaScript (Node.js) applications
- * can be integrated with GitHub Actions to implement a reliable
- * CI/CD pipeline.
- *
- * The automation improves software quality, reduces human error,
- * and enables faster and more consistent deployments.
- *
- * This project follows modern DevOps best practices and represents
- * a production-ready CI/CD automation workflow.
- *
- * ============================================================
+ * Fig.1: GitHub Actions deployment workflow (deploy.yml)
  */
 
 
-👩‍🎓 Author
+
+ * ============================================================
+ *  CLOUD INFRASTRUCTURE SETUP
+ * ============================================================
+ *
+ * Amazon S3 is used as the primary service for hosting static
+ * website content.
+ *
+ * ------------------------------------------------------------
+ * CLOUD INFRASTRUCTURE COMPONENTS
+ * ------------------------------------------------------------
+ * | Component   | Purpose                              |
+ * |-------------|--------------------------------------|
+ * | Amazon S3   | Static website storage                |
+ * | CloudFront  | Global CDN and secure access          |
+ * | IAM         | Access and identity management        |
+ *
+ * ------------------------------------------------------------
+ *
+ * Infrastructure Setup Steps:
+ * 1. Create an S3 bucket with a globally unique name
+ * 2. Enable static website hosting
+ * 3. Set index.html as entry point
+ * 4. Block public access to S3 bucket
+ * 5. Allow access only via CloudFront (OAC)
+ *
+ * This ensures the S3 bucket cannot be accessed directly.
+ *
+ * Fig.2: S3 bucket "cloud-admin-dashboard" created
+ * Fig.3: Objects uploaded for static website hosting
+ */
+
+
+
+ * ============================================================
+   SECURITY CONFIGURATION
+ * ============================================================
+ *
+ * Security is a critical part of this deployment.
+ *
+ * A dedicated IAM user is created for GitHub Actions to avoid
+ * using the AWS root account.
+ *
+ * ------------------------------------------------------------
+ * SECURITY CONTROLS OVERVIEW
+ * ------------------------------------------------------------
+ * | Security Control      | Implementation                     |
+ * |-----------------------|-------------------------------------|
+ * | IAM User              | Dedicated CI/CD user                |
+ * | Least Privilege       | Restricted S3 permissions           |
+ * | Credential Storage    | GitHub Secrets (Encrypted)          |
+ * | Public Access Control | S3 blocked, CloudFront allowed      |
+ *
+ * ------------------------------------------------------------
+ *
+ * IAM permissions are limited to:
+ * - Upload objects
+ * - Read objects
+ * - List bucket contents
+ *
+ * AWS access keys are encrypted using GitHub Secrets to prevent
+ * accidental exposure in logs or source code.
+ *
+ * Fig.6: IAM user for GitHub Actions
+ * Fig.7: IAM access keys provisioned
+ * Fig.8: Encrypted secrets in GitHub
+ */
+
+
+
+ * ============================================================
+   DEPLOYMENT VERIFICATION AND TESTING
+ * ============================================================
+ *
+ * After deployment, the website is tested using the CloudFront
+ * URL to ensure availability and correctness.
+ *
+ * ------------------------------------------------------------
+ * DEPLOYMENT TEST CASES
+ * ------------------------------------------------------------
+ * | Test Area     | Expected Result                     |
+ * |---------------|-------------------------------------|
+ * | Dashboard     | Loads without errors                |
+ * | Tables Page   | Pagination and filtering works      |
+ * | Widgets Page  | Widgets render correctly            |
+ * | Charts Page   | Charts display expected data        |
+ * | Console Logs  | No JavaScript errors                |
+ *
+ * ------------------------------------------------------------
+ *
+ * GitHub Actions confirms successful deployment execution.
+ *
+ * Browser developer tools are used to verify script execution.
+ *
+ * Fig.9: Successful GitHub Actions deployment
+ * Fig.10: S3 bucket updated after deployment
+ 
+
+ * ============================================================
+   CLOUD ARCHITECTURE
+ * ============================================================
+ *
+ * ------------------------------------------------------------
+ * CLOUD ARCHITECTURE FLOW
+ * ------------------------------------------------------------
+ * | Step | Component        | Action                           |
+ * |------|------------------|----------------------------------|
+ * | 1    | Developer        | Pushes code to GitHub            |
+ * | 2    | GitHub Actions   | Triggers CI/CD workflow          |
+ * | 3    | GitHub Secrets   | Provides AWS credentials         |
+ * | 4    | Amazon S3        | Stores static website files      |
+ * | 5    | CloudFront       | Serves content globally          |
+ *
+ * ------------------------------------------------------------
+ *
+ * Static assets (HTML, CSS, JS) are deployed to S3 and served
+ * securely via CloudFront CDN.
+ *
+ * Fig.11: Cloud Admin Dashboard Architecture
+
+ * PROJECT OUTCOMES
+ * ------------------------------------------------------------
+ * | Area              | Outcome                              |
+ * |-------------------|--------------------------------------|
+ * | CI/CD Automation  | Fully automated                      |
+ * | Deployment Speed  | Faster release cycles                |
+ * | Error Reduction   | Minimal manual intervention          |
+ * | Security          | IAM + Secrets + CloudFront           |
+ * | Scalability       | Global access via CDN                |
+ *
+ * ------------------------------------------------------------
+ *
+ * Issues such as access denial and caching were resolved using
+ * correct S3 policies, CloudFront configuration, and cache
+ * invalidation techniques.
+ *
+ * The project represents a secure and production-ready cloud
+ * deployment following industry best practices.
+ 
+🙍Author
 
 Developed by two students as part of a Cloud Computing Final Project:
 
