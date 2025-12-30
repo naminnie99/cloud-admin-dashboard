@@ -135,43 +135,58 @@ getAppVersion() → 1.0.0
 ✔ Build artifacts generated
 ✔ Test pipeline passed
 
-  ============================================================
-   DEPLOYMENT PIPELINE
-  ============================================================
- *
- * A deployment pipeline is a sequence of automated steps that
- * move application code from a version control system into a
- * live production environment.
- *
- * GitHub Actions is used to automate build and deployment
- * workflows using YAML configuration files.
- *
- * ------------------------------------------------------------
- * DEPLOYMENT PIPELINE SUMMARY
- * ------------------------------------------------------------
- * | Stage        | Tool Used        | Description                    |
- * |--------------|------------------|--------------------------------|
- * | Source Code  | GitHub           | Version control repository     |
- * | CI Trigger   | GitHub Actions   | Triggered on code push         |
- * | Build        | Node.js          | Generates static build files   |
- * | Artifact     | dist/ folder     | Deployment-ready output        |
- * | Deployment   | AWS S3           | Static website hosting         |
- *
- * ------------------------------------------------------------
- *
- * Cloud deployment is preferred over on-premise hosting due to
- * scalability, high availability, and simplified management.
- *
- * Amazon Web Services (AWS) enables global deployment and easy
- * CI/CD integration with a pay-as-you-use pricing model.
- *
- * Deployment Process:
- * 1. GitHub Actions retrieves the build artifact (HTML, CSS, JS)
- * 2. Files are automatically uploaded to an Amazon S3 bucket
- *
- * Secure authentication between GitHub Actions and AWS is
- * handled using encrypted credentials stored in GitHub Secrets.
- *
+============================================================
+ DEPLOYMENT PIPELINE
+============================================================
+
+A deployment pipeline is a sequence of automated steps that
+moves application code from a version control system into a
+production-ready environment.
+
+In this project, GitHub Actions is used to automate the
+deployment process, ensuring consistency, reliability, and
+minimal manual intervention. The pipeline is triggered
+automatically whenever code is pushed to the repository.
+
+------------------------------------------------------------
+ DEPLOYMENT PIPELINE SUMMARY
+------------------------------------------------------------
+| Stage        | Tool / Service   | Description                    |
+|--------------|------------------|--------------------------------|
+| Source Code  | GitHub           | Version control repository     |
+| CI Trigger   | GitHub Actions   | Triggered on code push         |
+| Build        | Node.js          | Generates static build files   |
+| Artifact     | dist/ directory  | Deployment-ready output        |
+| Deployment   | Amazon S3        | Static website hosting         |
+| Delivery     | CloudFront CDN   | Global content distribution    |
+
+------------------------------------------------------------
+ DEPLOYMENT WORKFLOW DESCRIPTION
+------------------------------------------------------------
+1. Developer pushes updated source code to GitHub.
+2. GitHub Actions automatically triggers the deployment
+   workflow defined in deploy.yml.
+3. The workflow retrieves build artifacts generated during
+   the CI stage.
+4. Static files (HTML, CSS, JavaScript) are uploaded to an
+   Amazon S3 bucket.
+5. Amazon CloudFront serves the content securely to users
+   via a global CDN.
+
+------------------------------------------------------------
+ CLOUD DEPLOYMENT RATIONALE
+------------------------------------------------------------
+Cloud deployment is preferred over on-premise hosting due to
+its scalability, high availability, and simplified system
+management.
+
+Amazon Web Services (AWS) enables seamless CI/CD integration
+with GitHub Actions and supports automated deployment using a
+pay-as-you-use pricing model.
+
+Secure authentication between GitHub Actions and AWS is
+handled using encrypted credentials stored in GitHub Secrets,
+preventing accidental exposure of sensitive access keys.
  * Fig.1: GitHub Actions deployment workflow (deploy.yml)
  */
 
@@ -192,9 +207,9 @@ getAppVersion() → 1.0.0
  * | Amazon S3   | Static website storage                |
  * | CloudFront  | Global CDN and secure access          |
  * | IAM         | Access and identity management        |
- *
+ 
  * ------------------------------------------------------------
- *
+ 
  * Infrastructure Setup Steps:
  * 1. Create an S3 bucket with a globally unique name
  * 2. Enable static website hosting
@@ -307,11 +322,11 @@ getAppVersion() → 1.0.0
  * | Scalability       | Global access via CDN                |
  *
  * ------------------------------------------------------------
- *
+ 
  * Issues such as access denial and caching were resolved using
  * correct S3 policies, CloudFront configuration, and cache
  * invalidation techniques.
- *
+ 
  * The project represents a secure and production-ready cloud
  * deployment following industry best practices.
  
