@@ -135,9 +135,8 @@ getAppVersion() → 1.0.0
 ✔ Build artifacts generated
 ✔ Test pipeline passed
 
-============================================================
- DEPLOYMENT PIPELINE
-============================================================
+
+  DEPLOYMENT PIPELINE
 
 A deployment pipeline is a sequence of automated steps that
 moves application code from a version control system into a
@@ -158,7 +157,7 @@ automatically whenever code is pushed to the repository.
 | Build        | Node.js          | Generates static build files   |
 | Artifact     | dist/ directory  | Deployment-ready output        |
 | Deployment   | Amazon S3        | Static website hosting         |
-| Delivery     | CloudFront CDN   | Global content distribution    |
+| Delivery     | CloudFront CDN   | Global content distribution   |
 
 ------------------------------------------------------------
  DEPLOYMENT WORKFLOW DESCRIPTION
@@ -187,171 +186,195 @@ pay-as-you-use pricing model.
 Secure authentication between GitHub Actions and AWS is
 handled using encrypted credentials stored in GitHub Secrets,
 preventing accidental exposure of sensitive access keys.
- * Fig.1: GitHub Actions deployment workflow (deploy.yml)
- */
+
+------------------------------------------------------------
+ FIGURE REFERENCE
+------------------------------------------------------------
+Fig.1: GitHub Actions deployment workflow (deploy.yml)
 
 
 
- * ============================================================
- *  CLOUD INFRASTRUCTURE SETUP
- * ============================================================
- *
- * Amazon S3 is used as the primary service for hosting static
- * website content.
- *
- * ------------------------------------------------------------
- * CLOUD INFRASTRUCTURE COMPONENTS
- * ------------------------------------------------------------
- * | Component   | Purpose                              |
- * |-------------|--------------------------------------|
- * | Amazon S3   | Static website storage                |
- * | CloudFront  | Global CDN and secure access          |
- * | IAM         | Access and identity management        |
- 
- * ------------------------------------------------------------
- 
- * Infrastructure Setup Steps:
- * 1. Create an S3 bucket with a globally unique name
- * 2. Enable static website hosting
- * 3. Set index.html as entry point
- * 4. Block public access to S3 bucket
- * 5. Allow access only via CloudFront (OAC)
- *
- * This ensures the S3 bucket cannot be accessed directly.
- *
- * Fig.2: S3 bucket "cloud-admin-dashboard" created
- * Fig.3: Objects uploaded for static website hosting
- */
+ CLOUD INFRASTRUCTURE SETUP
 
 
+Amazon Web Services (AWS) is used to host and deliver the
+static Cloud Admin Dashboard application. The infrastructure
+is designed to be secure, scalable, and suitable for real-
+world production deployment.
 
- * ============================================================
-   SECURITY CONFIGURATION
- * ============================================================
- *
- * Security is a critical part of this deployment.
- *
- * A dedicated IAM user is created for GitHub Actions to avoid
- * using the AWS root account.
- *
- * ------------------------------------------------------------
- * SECURITY CONTROLS OVERVIEW
- * ------------------------------------------------------------
- * | Security Control      | Implementation                     |
- * |-----------------------|-------------------------------------|
- * | IAM User              | Dedicated CI/CD user                |
- * | Least Privilege       | Restricted S3 permissions           |
- * | Credential Storage    | GitHub Secrets (Encrypted)          |
- * | Public Access Control | S3 blocked, CloudFront allowed      |
- *
- * ------------------------------------------------------------
- *
- * IAM permissions are limited to:
- * - Upload objects
- * - Read objects
- * - List bucket contents
- *
- * AWS access keys are encrypted using GitHub Secrets to prevent
- * accidental exposure in logs or source code.
- *
- * Fig.6: IAM user for GitHub Actions
- * Fig.7: IAM access keys provisioned
- * Fig.8: Encrypted secrets in GitHub
- */
+------------------------------------------------------------
+ CLOUD INFRASTRUCTURE COMPONENTS
+------------------------------------------------------------
+| Component   | Purpose                              |
+|-------------|--------------------------------------|
+| Amazon S3   | Static website storage                |
+| CloudFront  | Global CDN and secure content access  |
+| IAM         | Identity and access management        |
+
+------------------------------------------------------------
+ INFRASTRUCTURE SETUP STEPS
+------------------------------------------------------------
+1. Create an Amazon S3 bucket with a globally unique name.
+2. Enable static website hosting on the S3 bucket.
+3. Set index.html as the default entry point.
+4. Block public access to the S3 bucket.
+5. Allow access only through CloudFront using
+   Origin Access Control (OAC).
+
+This configuration ensures that the S3 bucket cannot be
+accessed directly from the internet.
+
+------------------------------------------------------------
+ FIGURE REFERENCE
+------------------------------------------------------------
+Fig.2: Amazon S3 bucket created for static hosting
+Fig.3: Static website files uploaded to S3
 
 
+SECURITY CONFIGURATION
 
- * ============================================================
-   DEPLOYMENT VERIFICATION AND TESTING
- * ============================================================
- *
- * After deployment, the website is tested using the CloudFront
- * URL to ensure availability and correctness.
- *
- * ------------------------------------------------------------
- * DEPLOYMENT TEST CASES
- * ------------------------------------------------------------
- * | Test Area     | Expected Result                     |
- * |---------------|-------------------------------------|
- * | Dashboard     | Loads without errors                |
- * | Tables Page   | Pagination and filtering works      |
- * | Widgets Page  | Widgets render correctly            |
- * | Charts Page   | Charts display expected data        |
- * | Console Logs  | No JavaScript errors                |
- *
- * ------------------------------------------------------------
- *
- * GitHub Actions confirms successful deployment execution.
- *
- * Browser developer tools are used to verify script execution.
- *
- * Fig.9: Successful GitHub Actions deployment
- * Fig.10: S3 bucket updated after deployment
- 
 
- * ============================================================
-   CLOUD ARCHITECTURE
- * ============================================================
- *
- * ------------------------------------------------------------
- * CLOUD ARCHITECTURE FLOW
- * ------------------------------------------------------------
- * | Step | Component        | Action                           |
- * |------|------------------|----------------------------------|
- * | 1    | Developer        | Pushes code to GitHub            |
- * | 2    | GitHub Actions   | Triggers CI/CD workflow          |
- * | 3    | GitHub Secrets   | Provides AWS credentials         |
- * | 4    | Amazon S3        | Stores static website files      |
- * | 5    | CloudFront       | Serves content globally          |
- *
- * ------------------------------------------------------------
- *
- * Static assets (HTML, CSS, JS) are deployed to S3 and served
- * securely via CloudFront CDN.
- *
- * Fig.11: Cloud Admin Dashboard Architecture
+Security is a critical component of the deployment pipeline.
+This project follows the principle of least privilege to
+minimize security risks during automated deployment.
 
- * PROJECT OUTCOMES
- * ------------------------------------------------------------
- * | Area              | Outcome                              |
- * |-------------------|--------------------------------------|
- * | CI/CD Automation  | Fully automated                      |
- * | Deployment Speed  | Faster release cycles                |
- * | Error Reduction   | Minimal manual intervention          |
- * | Security          | IAM + Secrets + CloudFront           |
- * | Scalability       | Global access via CDN                |
- *
- * ------------------------------------------------------------
- 
- * Issues such as access denial and caching were resolved using
- * correct S3 policies, CloudFront configuration, and cache
- * invalidation techniques.
- 
- * The project represents a secure and production-ready cloud
- * deployment following industry best practices.
+------------------------------------------------------------
+ SECURITY CONTROLS OVERVIEW
+------------------------------------------------------------
+| Security Control      | Implementation                     |
+|----------------------|-------------------------------------|
+| IAM User             | Dedicated CI/CD user                |
+| Least Privilege      | Restricted S3 permissions           |
+| Credential Storage   | GitHub Secrets (Encrypted)          |
+| Public Access Control| S3 blocked, CloudFront allowed      |
+
+------------------------------------------------------------
+ SECURITY IMPLEMENTATION DETAILS
+------------------------------------------------------------
+1. A dedicated IAM user is created for GitHub Actions.
+2. AWS root credentials are not used for deployment.
+3. IAM permissions are limited to:
+   - Upload objects
+   - Read objects
+   - List bucket contents
+4. AWS access keys are stored securely using GitHub Secrets.
+
+This approach prevents accidental credential exposure and
+unauthorized access.
+
+------------------------------------------------------------
+ FIGURE REFERENCE
+------------------------------------------------------------
+Fig.6: IAM user created for GitHub Actions
+Fig.7: IAM access keys generated
+Fig.8: Encrypted GitHub Secrets configuration
+
+
+DEPLOYMENT VERIFICATION AND TESTING
+
+
+After deployment, verification is performed to ensure the
+application is accessible, functional, and error-free.
+
+------------------------------------------------------------
+ DEPLOYMENT TEST CASES
+------------------------------------------------------------
+| Test Area     | Expected Result                     |
+|---------------|-------------------------------------|
+| Dashboard     | Loads without errors                |
+| Tables Page  | Pagination and filtering work       |
+| Widgets Page | Widgets render correctly            |
+| Charts Page  | Charts display expected data        |
+| Console Logs | No JavaScript errors                |
+
+------------------------------------------------------------
+ VERIFICATION METHODS
+------------------------------------------------------------
+1. Website accessed using CloudFront distribution URL.
+2. Navigation between pages tested using sidebar links.
+3. Browser developer tools used to inspect console output.
+4. GitHub Actions logs reviewed for deployment success.
+
+------------------------------------------------------------
+ FIGURE REFERENCE
+------------------------------------------------------------
+Fig.9: Successful GitHub Actions deployment
+Fig.10: Updated files visible in S3 bucket
+
+
+CLOUD ARCHITECTURE
+
+
+The cloud architecture defines the flow of code from
+development to global content delivery.
+
+------------------------------------------------------------
+ CLOUD ARCHITECTURE FLOW
+------------------------------------------------------------
+| Step | Component        | Action                           |
+|------|------------------|----------------------------------|
+| 1    | Developer        | Pushes code to GitHub            |
+| 2    | GitHub Actions   | Triggers CI/CD workflow          |
+| 3    | GitHub Secrets   | Supplies AWS credentials         |
+| 4    | Amazon S3        | Stores static website files      |
+| 5    | CloudFront CDN   | Delivers content globally        |
+
+------------------------------------------------------------
+ ARCHITECTURE DESCRIPTION
+------------------------------------------------------------
+Static assets such as HTML, CSS, and JavaScript are deployed
+to Amazon S3 and securely distributed to end users through
+CloudFront CDN.
+
+------------------------------------------------------------
+ FIGURE REFERENCE
+------------------------------------------------------------
+Fig.11: Cloud Admin Dashboard architecture diagram
+
+
+============================================================
+ PROJECT OUTCOMES
+============================================================
+
+The project successfully demonstrates a real-world CI/CD
+pipeline with automated deployment and cloud hosting.
+
+------------------------------------------------------------
+ PROJECT OUTCOME SUMMARY
+------------------------------------------------------------
+| Area             | Outcome                              |
+|------------------|--------------------------------------|
+| CI/CD Automation | Fully automated workflows             |
+| Deployment Speed | Faster release cycles                 |
+| Error Reduction  | Minimal manual intervention           |
+| Security         | IAM, Secrets, and CloudFront applied  |
+| Scalability      | Global access via CDN                 |
+
+------------------------------------------------------------
+ FINAL OBSERVATION
+------------------------------------------------------------
+Issues such as access denial and caching were resolved using
+correct S3 policies, CloudFront configuration, and cache
+invalidation techniques.
+
+The project follows industry best practices and represents a
+secure, production-ready cloud deployment.
  
 🙍Author
 
-Developed by two students as part of a Cloud Computing Final Project:
+Developed by TWO students as part of a Cloud Computing Final Project:
 
-Designed pipelines
-
-Configured automated builds
-
-Developed dashboard navigation
-
-Implemented testing
+1. Designed pipelines
+2. Configured automated builds
+3. Developed dashboard navigation
+4. Implemented testing
 
 🏁 Conclusion
 
 This project successfully demonstrates full CI/CD implementation using:
 
-Programming logic
-
-Automated build pipelines
-
-Automated test workflows
-
-Final deployable artifact output
-
-It follows real-world DevOps methodology and applies it on a working website.
+1. Programming logic
+2. Automated build pipelines
+3. Automated test workflows
+4. Final deployable artifact output
+5. It follows real-world DevOps methodology and applies it on a working website.
