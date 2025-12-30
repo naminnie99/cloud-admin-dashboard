@@ -332,9 +332,7 @@ CloudFront CDN.
 Fig.11: Cloud Admin Dashboard architecture diagram
 
 
-============================================================
- PROJECT OUTCOMES
-============================================================
+PROJECT OUTCOMES
 
 The project successfully demonstrates a real-world CI/CD
 pipeline with automated deployment and cloud hosting.
