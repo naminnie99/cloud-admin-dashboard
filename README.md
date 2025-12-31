@@ -194,7 +194,7 @@ Fig.1: GitHub Actions deployment workflow (deploy.yml)
 
 
 
- CLOUD INFRASTRUCTURE SETUP
+ -CLOUD INFRASTRUCTURE SETUP-
 
 
 Amazon Web Services (AWS) is used to host and deliver the
