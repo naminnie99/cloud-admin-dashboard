@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
  "scripts": {
-  "build": "copyfiles -u 1 public/**/* dist"
+  "build": "copyfiles -u 1 public/**/* dist",
   "lint": "eslint custom/**/*.js tests/**/*.js",
   "test": "jest"
 },
